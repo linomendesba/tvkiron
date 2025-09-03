@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <title>BetStat Tv</title>
+    <style>
+        :root {
+            --primary-color: #292d36;
+            --secondary-color: #1c1f26;
+            --accent-color: #2a2e35;
+            --text-color: #1fad8b;
+            --highlight-color: #005540;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            min-height: 100vh;
+            overflow-x: hidden;
+            padding-top: 60px;
+            line-height: 1.6;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: #005540;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            z-index: 1000;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        header img {
+            height: 35px;
+        }
+
+        .header-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .header-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 600;
+            padding: 6px 12px;
+            border-radius: 4px;
+        }
+
+        .marquee-container {
+            position: fixed;
+            top: 50px;
+            left: 0;
+            width: 100%;
+            background: var(--primary-color);
+            color: var(--text-color);
+            font-size: 1.1em;
+            font-weight: 600;
+            padding: 8px 0;
+            z-index: 999;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .marquee-container span {
+            display: inline-block;
+            padding-left: 100%;
+            animation: marquee 110s linear infinite;
+            white-space: nowrap;
+        }
+
+        .main-content {
+            max-width: 1800px;
+            margin: 80px auto 60px;
+            padding: 0 15px;
+            display: flex;
+            gap: 20px;
+        }
+
+        .main-video-container {
+            position: relative;
+            width: 60%;
+            padding-top: 33.75%; /* 60% * 56.25% for 16:9 aspect ratio */
+            background-color: #000;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        #main-video-player {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        #main-video-title {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(41, 45, 54, 0.8);
+            padding: 10px 15px;
+            font-weight: 600;
+            font-size: 1.2em;
+            z-index: 1;
+            color: white;
+        }
+
+        .side-videos-container {
+            width: 90%;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-content: flex-start;
+        }
+
+        .side-video {
+            position: relative;
+            width: 100%;
+            padding-top: 28.125%; /* 40% * 56.25% / 2 for 16:9 aspect ratio, adjusted for 2 per row */
+            background-color: #000;
+            border-radius: 6px;
+            overflow: hidden;
+            flex: 1 1 48%; /* Flex to share space evenly */
+        }
+
+        .side-video iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .side-video-title {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(41, 45, 54, 0.8);
+            padding: 5px 10px;
+            font-weight: 600;
+            font-size: 0.9em;
+            color: white;
+            z-index: 1;
+        }
+
+        .video-selector {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .selector {
+            background-color: var(--accent-color);
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.3s, transform 0.2s;
+            border: 2px solid transparent;
+            text-align: center;
+        }
+
+        .selector:hover {
+            transform: translateY(-4px);
+            background-color: var(--primary-color);
+        }
+
+        .selector.active {
+            background-color: var(--highlight-color);
+            border-color: var(--text-color);
+            color: white;
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-100%); }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                height: auto;
+                padding: 10px;
+            }
+            body {
+                padding-top: 90px;
+            }
+            .marquee-container {
+                top: 80px;
+            }
+            .main-content {
+                flex-direction: column;
+            }
+            .main-video-container {
+                width: 100%;
+                padding-top: 56.25%;
+            }
+            .side-videos-container {
+                width: 100%;
+                flex-direction: row;
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+            .side-video {
+                width: 48%;
+                padding-top: 27%; /* Adjusted for smaller screens */
+            }
+            .video-selector {
+                gap: 10px;
+            }
+            .selector {
+                width: 45%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="logo.png" alt="Logo">
+        <img src="betano-logo-0-1.png" alt="Betano Logo">
+        <div class="header-links">
+            <a href="https://www.betstat.site/payment.html">Assine Agora</a>
+            <a href="https://t.me/sitebetstat">Contato</a>
+        </div>
+    </header>
+
+    <div class="marquee-container">
+        <span>O BetStat é uma plataforma inovadora que revoluciona a maneira como você faz seus investimentos. Com análises detalhadas, estatísticas precisas e uma comunidade ativa, fornecemos todas as ferramentas necessárias para transformar suas apostas em investimentos inteligentes.</span>
+    </div>
+
+    <div class="main-content">
+        <div class="main-video-container">
+            <div id="main-video-title"></div>
+            <iframe id="main-video-player" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+
+        <div class="side-videos-container" id="side-videos-container">
+            <!-- Side videos will be dynamically populated by JavaScript -->
+        </div>
+    </div>
+
+    <div class="video-selector">
+        <div class="selector" data-video-src="https://kiron.streamamg.com/199/fast-league-single-yaehaejeebii7chail4u.html" data-video-title="England">England</div>
+        <div class="selector" data-video-src="https://streaming.kiron.n4m.ro/50179b0d-BrazillianSingle-199-a164a445d82c.html" data-video-title="Brasil">Brasil</div>
+        <div class="selector" data-video-src="https://kiron.streamamg.com/199/serie-a-zoopeicothooxe6sij4o.html" data-video-title="Italy">Italy</div>
+        <div class="selector" data-video-src="https://streaming.kiron.n4m.ro/50179b0d-LatamSingle-199-a164a445d82c.html" data-video-title="America Latina">America Latina</div>
+        <div class="selector" data-video-src="https://kiron.streamamg.com/199/la-liga-on5eus4pee2cee1im8ie.html" data-video-title="Spain">Spain</div>
+    </div>
+    <br>
+    <br>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const mainPlayer = document.getElementById('main-video-player');
+            const mainTitle = document.getElementById('main-video-title');
+            const sideVideosContainer = document.getElementById('side-videos-container');
+            const selectors = document.querySelectorAll('.selector');
+
+            // Lista de vídeos disponíveis
+            const videos = [
+                { src: "https://kiron.streamamg.com/199/fast-league-single-yaehaejeebii7chail4u.html", title: "England" },
+                { src: "https://streaming.kiron.n4m.ro/50179b0d-BrazillianSingle-199-a164a445d82c.html", title: "Brasil" },
+                { src: "https://kiron.streamamg.com/199/serie-a-zoopeicothooxe6sij4o.html", title: "Italy" },
+                { src: "https://streaming.kiron.n4m.ro/50179b0d-LatamSingle-199-a164a445d82c.html", title: "America Latina" },
+                { src: "https://kiron.streamamg.com/199/la-liga-on5eus4pee2cee1im8ie.html", title: "Spain" }
+            ];
+
+            function setActiveVideo(selector) {
+                const videoSrc = selector.dataset.videoSrc;
+                const videoTitle = selector.dataset.videoTitle;
+
+                // Atualiza o player principal
+                mainPlayer.src = videoSrc;
+                mainTitle.textContent = videoTitle;
+
+                // Atualiza o estilo do seletor ativo
+                selectors.forEach(sel => sel.classList.remove('active'));
+                selector.classList.add('active');
+
+                // Atualiza os vídeos laterais
+                updateSideVideos(videoTitle);
+            }
+
+            function updateSideVideos(activeTitle) {
+                // Limpa os vídeos laterais atuais
+                sideVideosContainer.innerHTML = '';
+
+                // Filtra vídeos, excluindo o ativo, e limita a 4
+                const otherVideos = videos.filter(video => video.title !== activeTitle).slice(0, 4);
+
+                // Cria novos iframes para os vídeos laterais (2 por linha)
+                otherVideos.forEach(video => {
+                    const sideVideoContainer = document.createElement('div');
+                    sideVideoContainer.classList.add('side-video');
+
+                    const sideVideoTitle = document.createElement('div');
+                    sideVideoTitle.classList.add('side-video-title');
+                    sideVideoTitle.textContent = video.title;
+
+                    const sideVideoIframe = document.createElement('iframe');
+                    sideVideoIframe.src = video.src;
+                    sideVideoIframe.allow = "autoplay; encrypted-media";
+                    sideVideoIframe.setAttribute('allowfullscreen', '');
+
+                    sideVideoContainer.appendChild(sideVideoTitle);
+                    sideVideoContainer.appendChild(sideVideoIframe);
+                    sideVideosContainer.appendChild(sideVideoContainer);
+                });
+            }
+
+            // Define o primeiro vídeo como ativo quando a página carregar
+            if (selectors.length > 0) {
+                setActiveVideo(selectors[0]);
+            }
+
+            // Adiciona o evento de clique para cada seletor
+            selectors.forEach(selector => {
+                selector.addEventListener('click', () => {
+                    setActiveVideo(selector);
+                });
+            });
+        });
+    </script>
+    <script>
+  // Bloqueia o menu de contexto (clique direito)
+document.addEventListener("contextmenu", function(e) {
+    e.preventDefault();
+});
+
+// Bloqueia atalhos de teclado comuns para ferramentas de desenvolvimento
+document.addEventListener("keydown", function(e) {
+    // F12
+    if (e.key === "F12") {
+        e.preventDefault();
+    }
+    
+    // Ctrl + Shift + I
+    if (e.ctrlKey && e.shiftKey && e.key === "I") {
+        e.preventDefault();
+    }
+    
+    // Ctrl + U (ver código fonte)
+    if (e.ctrlKey && e.key === "u") {
+        e.preventDefault();
+    }
+    
+    // Ctrl + Shift + J (console)
+    if (e.ctrlKey && e.shiftKey && e.key === "J") {
+        e.preventDefault();
+    }
+    
+    // Ctrl + Shift + C (inspeção de elementos)
+    if (e.ctrlKey && e.shiftKey && e.key === "C") {
+        e.preventDefault();
+    }
+    
+    // Ctrl + S (salvar página)
+    if (e.ctrlKey && e.key === "s") {
+        e.preventDefault();
+    }
+    
+    // Ctrl + P (imprimir)
+    if (e.ctrlKey && e.key === "p") {
+        e.preventDefault();
+    }
+});
+
+// Detecta abertura de ferramentas de desenvolvimento
+const devtools = { open: false };
+const element = new Image();
+Object.defineProperty(element, 'id', {
+    get: function () {
+        devtools.open = true;
+    }
+});
+
+// Adiciona detecção alternativa de devtools
+(function() {
+    const threshold = 160;
+    const checkDevTools = function() {
+        if ((window.outerWidth - window.innerWidth) > threshold || 
+            (window.outerHeight - window.innerHeight) > threshold) {
+            devtools.open = true;
+        }
+    };
+    
+    window.addEventListener('resize', checkDevTools);
+    setInterval(checkDevTools, 500);
+})();
+
+// Monitoramento contínuo
+console.log('%c', element);
+setInterval(function() {
+    if (devtools.open) {
+        document.body.innerHTML = '<h1>Acesso não autorizado detectado</h1>';
+        // Ou redirecionar:
+        // window.location.href = 'about:blank';
+        devtools.open = false;
+    }
+}, 1000);
+
+// Impede seleção de texto
+document.addEventListener('selectstart', function(e) {
+    e.preventDefault();
+});
+
+// Impede arrastar e soltar
+document.addEventListener('dragstart', function(e) {
+    e.preventDefault();
+});
+
+// Ofusca console
+console.log = function() {};
+console.debug = function() {};
+console.info = function() {};
+</script>
+</body>
+</html>
