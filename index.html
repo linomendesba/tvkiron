@@ -123,9 +123,9 @@
         }
 
         .side-videos-container {
-            width: 90%;
+            width: 40%;
             display: flex;
-            flex-wrap: wrap;
+            flex-direction: column;
             gap: 10px;
             align-content: flex-start;
         }
@@ -133,11 +133,10 @@
         .side-video {
             position: relative;
             width: 100%;
-            padding-top: 28.125%; /* 40% * 56.25% / 2 for 16:9 aspect ratio, adjusted for 2 per row */
+            padding-top: 56.25%; /* 16:9 aspect ratio */
             background-color: #000;
             border-radius: 6px;
             overflow: hidden;
-            flex: 1 1 48%; /* Flex to share space evenly */
         }
 
         .side-video iframe {
