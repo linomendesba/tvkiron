@@ -1,434 +1,280 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-    <title>BetStat Tv</title>
+    [cite_start]<meta charset="UTF-8"> [cite: 1]
+    [cite_start]<meta name="viewport" content="width=device-width, initial-scale=1.0"> [cite: 1]
+    [cite_start]<link rel="shortcut icon" href="favicon.ico" type="image/x-icon"> [cite: 1]
+    [cite_start]<title>BetStat Tv</title> [cite: 1]
     <style>
         :root {
-            --primary-color: #292d36;
-            --secondary-color: #1c1f26;
-            --accent-color: #2a2e35;
-            --text-color: #1fad8b;
-            --highlight-color: #005540;
+            [cite_start]--primary-color: #292d36; [cite: 1]
+            [cite_start]--secondary-color: #1c1f26; [cite: 2]
+            [cite_start]--accent-color: #2a2e35; [cite: 2]
+            [cite_start]--text-color: #1fad8b; [cite: 2]
+            [cite_start]--highlight-color: #005540; [cite: 2]
         }
 
         * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+            [cite_start]margin: 0; [cite: 2]
+            [cite_start]padding: 0; [cite: 3]
+            [cite_start]box-sizing: border-box; [cite: 3]
         }
 
         body {
-            font-family: 'Arial', sans-serif;
-            background-color: var(--secondary-color);
-            color: var(--text-color);
-            min-height: 100vh;
-            overflow-x: hidden;
-            padding-top: 60px;
-            line-height: 1.6;
+            [cite_start]font-family: 'Arial', sans-serif; [cite: 3]
+            [cite_start]background-color: var(--secondary-color); [cite: 4]
+            [cite_start]color: var(--text-color); [cite: 4]
+            [cite_start]min-height: 100vh; [cite: 4]
+            [cite_start]overflow-x: hidden; [cite: 4]
+            [cite_start]padding-top: 60px; [cite: 4]
+            [cite_start]line-height: 1.6; [cite: 4]
         }
 
         header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background: #005540;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 20px;
-            z-index: 1000;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            [cite_start]position: fixed; [cite: 5]
+            [cite_start]top: 0; [cite: 6]
+            [cite_start]left: 0; [cite: 6]
+            [cite_start]width: 100%; [cite: 6]
+            [cite_start]background: #005540; [cite: 6]
+            [cite_start]height: 50px; [cite: 6]
+            [cite_start]display: flex; [cite: 6]
+            [cite_start]align-items: center; [cite: 6]
+            [cite_start]justify-content: space-between; [cite: 6]
+            [cite_start]padding: 0 20px; [cite: 6]
+            [cite_start]z-index: 1000; [cite: 7]
+            [cite_start]box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); [cite: 7]
         }
 
         header img {
-            height: 35px;
+            [cite_start]height: 35px; [cite: 8]
         }
 
         .header-links {
-            display: flex;
-            gap: 15px;
+            [cite_start]display: flex; [cite: 9]
+            [cite_start]gap: 15px; [cite: 10]
         }
 
         .header-links a {
-            color: var(--text-color);
-            text-decoration: none;
-            font-weight: 600;
-            padding: 6px 12px;
-            border-radius: 4px;
+            [cite_start]color: var(--text-color); [cite: 10]
+            [cite_start]text-decoration: none; [cite: 11]
+            [cite_start]font-weight: 600; [cite: 11]
+            [cite_start]padding: 6px 12px; [cite: 11]
+            [cite_start]border-radius: 4px; [cite: 11]
         }
 
         .marquee-container {
-            position: fixed;
-            top: 50px;
-            left: 0;
-            width: 100%;
-            background: var(--primary-color);
-            color: var(--text-color);
-            font-size: 1.1em;
-            font-weight: 600;
-            padding: 8px 0;
-            z-index: 999;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            [cite_start]position: fixed; [cite: 11]
+            [cite_start]top: 50px; [cite: 12]
+            [cite_start]left: 0; [cite: 12]
+            [cite_start]width: 100%; [cite: 12]
+            [cite_start]background: var(--primary-color); [cite: 12]
+            [cite_start]color: var(--text-color); [cite: 12]
+            [cite_start]font-size: 1.1em; [cite: 12]
+            [cite_start]font-weight: 600; [cite: 12]
+            [cite_start]padding: 8px 0; [cite: 12]
+            [cite_start]z-index: 999; [cite: 12]
+            [cite_start]box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); [cite: 13]
         }
 
         .marquee-container span {
-            display: inline-block;
-            padding-left: 100%;
-            animation: marquee 110s linear infinite;
-            white-space: nowrap;
+            [cite_start]display: inline-block; [cite: 13]
+            [cite_start]padding-left: 100%; [cite: 14]
+            [cite_start]animation: marquee 110s linear infinite; [cite: 14]
+            [cite_start]white-space: nowrap; [cite: 14]
         }
 
         .main-content {
-            max-width: 1800px;
-            margin: 80px auto 60px;
-            padding: 0 15px;
-            display: flex;
-            gap: 20px;
+            [cite_start]max-width: 1800px; [cite: 15]
+            [cite_start]margin: 80px auto 60px; [cite: 15]
+            [cite_start]padding: 0 15px; [cite: 15]
+            [cite_start]display: flex; [cite: 15]
+            [cite_start]gap: 20px; [cite: 15]
         }
 
-        .main-video-container {
+        /* Novo container para os vídeos */
+        .video-container {
             position: relative;
-            width: 60%;
-            padding-top: 0;
-            height: auto;
-            background-color: #000;
-            border-radius: 8px;
-            overflow: hidden;
-            aspect-ratio: 16 / 9;
+            flex: 1; /* Faz com que os 3 vídeos dividam o espaço igualmente */
+            min-width: 0; /* Necessário para o flexbox funcionar corretamente */
+            [cite_start]background-color: #000; [cite: 17, 23]
+            [cite_start]border-radius: 8px; [cite: 17]
+            [cite_start]overflow: hidden; [cite: 17, 24]
+            aspect-ratio: 16 / 9; /* Mantém a proporção 16:9 */
         }
 
-        #main-video-player {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            border: none;
+        .video-container iframe {
+            [cite_start]position: absolute; [cite: 19, 25]
+            [cite_start]top: 0; [cite: 19, 25]
+            [cite_start]left: 0; [cite: 19, 25]
+            [cite_start]width: 100%; [cite: 19, 25]
+            [cite_start]height: 100%; [cite: 19, 25]
+            [cite_start]border: none; [cite: 19, 25]
         }
 
-        #main-video-title {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background: rgba(41, 45, 54, 0.8);
-            padding: 10px 15px;
-            font-weight: 600;
-            font-size: 1.2em;
-            z-index: 1;
-            color: white;
+        .video-title {
+            [cite_start]position: absolute; [cite: 20, 27]
+            [cite_start]top: 0; [cite: 20, 27]
+            [cite_start]left: 0; [cite: 20, 27]
+            [cite_start]width: 100%; [cite: 20, 27]
+            [cite_start]background: rgba(41, 45, 54, 0.8); [cite: 20, 27]
+            [cite_start]padding: 10px 15px; [cite: 20]
+            [cite_start]font-weight: 600; [cite: 20, 27]
+            [cite_start]font-size: 1.2em; [cite: 20]
+            [cite_start]z-index: 1; [cite: 20, 28]
+            [cite_start]color: white; [cite: 21, 27]
         }
 
-        .side-videos-container {
-            width: 40%;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            align-content: flex-start;
-        }
-
-        .side-video {
-            position: relative;
-            width: 100%;
-            padding-top: 56.25%; /* 16:9 aspect ratio */
-            background-color: #000;
-            border-radius: 6px;
-            overflow: hidden;
-        }
-
-        .side-video iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-
-        .side-video-title {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background: rgba(41, 45, 54, 0.8);
-            padding: 5px 10px;
-            font-weight: 600;
-            font-size: 0.9em;
-            color: white;
-            z-index: 1;
-        }
-
-        .video-selector {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            flex-wrap: wrap;
-            margin-top: 20px;
-        }
-
-        .selector {
-            background-color: var(--accent-color);
-            padding: 10px 20px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: background-color 0.3s, transform 0.2s;
-            border: 2px solid transparent;
-            text-align: center;
-        }
-
-        .selector:hover {
-            transform: translateY(-4px);
-            background-color: var(--primary-color);
-        }
-
-        .selector.active {
-            background-color: var(--highlight-color);
-            border-color: var(--text-color);
-            color: white;
-        }
 
         @keyframes marquee {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-100%); }
+            [cite_start]0% { transform: translateX(0); [cite: 33]
+            }
+            [cite_start]100% { transform: translateX(-100%); [cite: 34]
+            }
         }
 
         @media (max-width: 768px) {
             header {
-                flex-direction: column;
-                height: auto;
-                padding: 10px;
+                [cite_start]flex-direction: column; [cite: 35]
+                [cite_start]height: auto; [cite: 36]
+                [cite_start]padding: 10px; [cite: 36]
             }
             body {
-                padding-top: 90px;
+                [cite_start]padding-top: 90px; [cite: 36]
             }
             .marquee-container {
-                top: 80px;
+                [cite_start]top: 80px; [cite: 38]
             }
             .main-content {
-                flex-direction: column;
+                [cite_start]flex-direction: column; [cite: 39]
             }
-            .main-video-container {
-                width: 100%;
-                padding-top: 56.25%;
-            }
-            .side-videos-container {
-                width: 100%;
-                flex-direction: row;
-                flex-wrap: wrap;
-                gap: 10px;
-            }
-            .side-video {
-                width: 48%;
-                padding-top: 27%; /* Adjusted for smaller screens */
-            }
-            .video-selector {
-                gap: 10px;
-            }
-            .selector {
-                width: 45%;
-            }
+            /* Não são necessárias regras adicionais para .video-container aqui,
+              pois o 'flex-direction: column' no pai (.main-content) 
+              já faz com que eles se empilhem verticalmente com 100% de largura.
+            */
         }
     </style>
 </head>
 <body>
-    <header>
-        <img src="logo.png" alt="Logo">
-        <img src="betano-logo-0-1.png" alt="Betano Logo">
-        <div class="header-links">
-            <a href="https://www.betstat.site/payment.html">Assine Agora</a>
-            <a href="https://t.me/sitebetstat">Contato</a>
+    [cite_start]<header> [cite: 5]
+        [cite_start]<img src="logo.png" alt="Logo"> [cite: 8]
+        [cite_start]<img src="betano-logo-0-1.png" alt="Betano Logo"> [cite: 8]
+        [cite_start]<div class="header-links"> [cite: 9]
+            [cite_start]<a href="https://www.betstat.site/payment.html">Assine Agora</a> [cite: 10, 11]
+            [cite_start]<a href="https://t.me/sitebetstat">Contato</a> [cite: 10, 11]
         </div>
     </header>
 
-    <div class="marquee-container">
-        <span>O BetStat é uma plataforma inovadora que revoluciona a maneira como você faz seus investimentos. Com análises detalhadas, estatísticas precisas e uma comunidade ativa, fornecemos todas as ferramentas necessárias para transformar suas apostas em investimentos inteligentes.</span>
+    [cite_start]<div class="marquee-container"> [cite: 11]
+        [cite_start]<span>O BetStat [cite: 45]
+[cite_start]é uma plataforma inovadora que revoluciona a maneira como você faz seus investimentos. [cite: 45]
+[cite_start]Com análises detalhadas, estatísticas precisas e uma comunidade ativa, fornecemos todas as ferramentas necessárias para transformar suas apostas em investimentos inteligentes.</span> [cite: 46]
     </div>
 
-    <div class="main-content">
-        <div class="main-video-container">
-            <div id="main-video-title"></div>
-            <iframe id="main-video-player" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    [cite_start]<div class="main-content"> [cite: 15]
+        <div class="video-container">
+            <div class="video-title">England</div>
+            <iframe src="https://iframe.net4media.net/streams/0199ce77-5337-7017-bae4-4df2438ddba0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
         </div>
 
-        <div class="side-videos-container" id="side-videos-container">
-            <!-- Side videos will be dynamically populated by JavaScript -->
+        <div class="video-container">
+            <div class="video-title">Italy</div>
+            <iframe src="https://iframe.net4media.net/streams/0199ce72-62fd-72f8-a616-0d5413281f85" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+
+        <div class="video-container">
+            <div class="video-title">Spain</div>
+            <iframe src="https://iframe.net4media.net/streams/0199ce73-c384-705b-84f9-88c522fb45a4" allow="autoplay; encrypted-media" allowfullscreen></iframe>
         </div>
     </div>
 
-    <div class="video-selector">
-        <div class="selector" data-video-src="https://iframe.net4media.net/streams/0199ce77-5337-7017-bae4-4df2438ddba0" data-video-title="England">England</div>
-        <div class="selector" data-video-src="https://iframe.net4media.net/streams/0199ce72-62fd-72f8-a616-0d5413281f85" data-video-title="Italy">Italy</div>
-        <div class="selector" data-video-src="https://iframe.net4media.net/streams/0199ce73-c384-705b-84f9-88c522fb45a4" data-video-title="Spain">Spain</div>
-    </div>
-    <br>
-    <br>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const mainPlayer = document.getElementById('main-video-player');
-            const mainTitle = document.getElementById('main-video-title');
-            const sideVideosContainer = document.getElementById('side-videos-container');
-            const selectors = document.querySelectorAll('.selector');
-
-            // Lista de vídeos disponíveis
-            const videos = [
-                { src: "https://iframe.net4media.net/streams/0199ce77-5337-7017-bae4-4df2438ddba0", title: "England" },
-                { src: "https://iframe.net4media.net/streams/0199ce72-62fd-72f8-a616-0d5413281f85", title: "Italy" },
-                { src: "https://iframe.net4media.net/streams/0199ce73-c384-705b-84f9-88c522fb45a4", title: "Spain" }
-            ];
-
-            function setActiveVideo(selector) {
-                const videoSrc = selector.dataset.videoSrc;
-                const videoTitle = selector.dataset.videoTitle;
-
-                // Atualiza o player principal
-                mainPlayer.src = videoSrc;
-                mainTitle.textContent = videoTitle;
-
-                // Atualiza o estilo do seletor ativo
-                selectors.forEach(sel => sel.classList.remove('active'));
-                selector.classList.add('active');
-
-                // Atualiza os vídeos laterais
-                updateSideVideos(videoTitle);
-            }
-
-            function updateSideVideos(activeTitle) {
-                // Limpa os vídeos laterais atuais
-                sideVideosContainer.innerHTML = '';
-
-                // Filtra vídeos, excluindo o ativo
-                const otherVideos = videos.filter(video => video.title !== activeTitle);
-
-                // Cria novos iframes para os vídeos laterais (2 por linha)
-                otherVideos.forEach(video => {
-                    const sideVideoContainer = document.createElement('div');
-                    sideVideoContainer.classList.add('side-video');
-
-                    const sideVideoTitle = document.createElement('div');
-                    sideVideoTitle.classList.add('side-video-title');
-                    sideVideoTitle.textContent = video.title;
-
-                    const sideVideoIframe = document.createElement('iframe');
-                    sideVideoIframe.src = video.src;
-                    sideVideoIframe.allow = "autoplay; encrypted-media";
-                    sideVideoIframe.setAttribute('allowfullscreen', '');
-
-                    sideVideoContainer.appendChild(sideVideoTitle);
-                    sideVideoContainer.appendChild(sideVideoIframe);
-                    sideVideosContainer.appendChild(sideVideoContainer);
-                });
-            }
-
-            // Define o primeiro vídeo como ativo quando a página carregar
-            if (selectors.length > 0) {
-                setActiveVideo(selectors[0]);
-            }
-
-            // Adiciona o evento de clique para cada seletor
-            selectors.forEach(selector => {
-                selector.addEventListener('click', () => {
-                    setActiveVideo(selector);
-                });
-            });
-        });
-    </script>
     <script>
   // Bloqueia o menu de contexto (clique direito)
-document.addEventListener("contextmenu", function(e) {
-    e.preventDefault();
+[cite_start]document.addEventListener("contextmenu", function(e) { [cite: 61]
+    [cite_start]e.preventDefault(); [cite: 61]
 });
-
 // Bloqueia atalhos de teclado comuns para ferramentas de desenvolvimento
-document.addEventListener("keydown", function(e) {
+[cite_start]document.addEventListener("keydown", function(e) { [cite: 62]
     // F12
-    if (e.key === "F12") {
-        e.preventDefault();
+    [cite_start]if (e.key === "F12") { [cite: 62]
+        [cite_start]e.preventDefault(); [cite: 62]
     }
     
     // Ctrl + Shift + I
-    if (e.ctrlKey && e.shiftKey && e.key === "I") {
-        e.preventDefault();
+    [cite_start]if (e.ctrlKey && e.shiftKey && e.key === "I") { [cite: 62]
+        [cite_start]e.preventDefault(); [cite: 62]
     }
     
     // Ctrl + U (ver código fonte)
-    if (e.ctrlKey && e.key === "u") {
-        e.preventDefault();
+    [cite_start]if (e.ctrlKey && e.key === "u") { [cite: 62]
+   
+     [cite_start]e.preventDefault(); [cite: 63]
     }
     
     // Ctrl + Shift + J (console)
-    if (e.ctrlKey && e.shiftKey && e.key === "J") {
-        e.preventDefault();
+    [cite_start]if (e.ctrlKey && e.shiftKey && e.key === "J") { [cite: 63]
+        [cite_start]e.preventDefault(); [cite: 63]
     }
     
     // Ctrl + Shift + C (inspeção de elementos)
-    if (e.ctrlKey && e.shiftKey && e.key === "C") {
-        e.preventDefault();
+    [cite_start]if (e.ctrlKey && e.shiftKey && e.key === "C") { [cite: 63]
+        [cite_start]e.preventDefault(); [cite: 63]
     }
     
-    // Ctrl + S (salvar página)
-    if (e.ctrlKey && e.key === "s") {
-        e.preventDefault();
+    // Ctrl + S (salvar 
+    [cite_start]página) [cite: 64]
+    [cite_start]if (e.ctrlKey && e.key === "s") { [cite: 64]
+        [cite_start]e.preventDefault(); [cite: 64]
     }
     
     // Ctrl + P (imprimir)
-    if (e.ctrlKey && e.key === "p") {
-        e.preventDefault();
+    [cite_start]if (e.ctrlKey && e.key === "p") { [cite: 64]
+        [cite_start]e.preventDefault(); [cite: 64]
     }
 });
-
 // Detecta abertura de ferramentas de desenvolvimento
-const devtools = { open: false };
-const element = new Image();
-Object.defineProperty(element, 'id', {
-    get: function () {
-        devtools.open = true;
+[cite_start]const devtools = { open: false }; [cite: 65]
+[cite_start]const element = new Image(); [cite: 65]
+[cite_start]Object.defineProperty(element, 'id', { [cite: 66]
+    [cite_start]get: function () { [cite: 66]
+        [cite_start]devtools.open = true; [cite: 66]
     }
 });
-
 // Adiciona detecção alternativa de devtools
-(function() {
-    const threshold = 160;
-    const checkDevTools = function() {
-        if ((window.outerWidth - window.innerWidth) > threshold || 
-            (window.outerHeight - window.innerHeight) > threshold) {
-            devtools.open = true;
+(function() [cite_start]{ [cite: 67]
+    [cite_start]const threshold = 160; [cite: 67]
+    [cite_start]const checkDevTools = function() { [cite: 67]
+        [cite_start]if ((window.outerWidth - window.innerWidth) > threshold || [cite: 67]
+            (window.outerHeight - window.innerHeight) [cite_start]> threshold) { [cite: 67]
+            [cite_start]devtools.open = true; [cite: 67]
         }
     };
     
-    window.addEventListener('resize', checkDevTools);
-    setInterval(checkDevTools, 500);
+    [cite_start]window.addEventListener('resize', checkDevTools); [cite: 67]
+    [cite_start]setInterval(checkDevTools, 500); [cite: 67]
 })();
-
 // Monitoramento contínuo
-console.log('%c', element);
-setInterval(function() {
-    if (devtools.open) {
-        document.body.innerHTML = '<h1>Acesso não autorizado detectado</h1>';
+[cite_start]console.log('%c', element); [cite: 68]
+[cite_start]setInterval(function() { [cite: 68]
+    [cite_start]if (devtools.open) { [cite: 68]
+        [cite_start]document.body.innerHTML = '<h1>Acesso não autorizado detectado</h1>'; [cite: 68]
         // Ou redirecionar:
         // window.location.href = 'about:blank';
-        devtools.open = false;
+        [cite_start]devtools.open = false; [cite: 68]
     }
-}, 1000);
-
+[cite_start]}, 1000); [cite: 68]
 // Impede seleção de texto
-document.addEventListener('selectstart', function(e) {
-    e.preventDefault();
+[cite_start]document.addEventListener('selectstart', function(e) { [cite: 69]
+    [cite_start]e.preventDefault(); [cite: 69]
 });
-
 // Impede arrastar e soltar
-document.addEventListener('dragstart', function(e) {
-    e.preventDefault();
+[cite_start]document.addEventListener('dragstart', function(e) { [cite: 70]
+    [cite_start]e.preventDefault(); [cite: 70]
 });
 
 // Ofusca console
-console.log = function() {};
-console.debug = function() {};
-console.info = function() {};
+[cite_start]console.log = function() {}; [cite: 70]
+[cite_start]console.debug = function() {}; [cite: 71]
+[cite_start]console.info = function() {}; [cite: 71]
 </script>
 </body>
 </html>
