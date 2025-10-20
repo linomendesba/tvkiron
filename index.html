@@ -91,19 +91,24 @@
             gap: 20px;
         }
 
-        /* Container ajustado para os vídeos */
-        .video-container {
+        /* 1. O item flexível que divide o espaço */
+        .video-flex-item {
+            flex: 1; /* Divide o espaço igualmente */
+            min-width: 0; /* Permite que encolha */
+        }
+
+        /* 2. O container interno que FORÇA a proporção 16:9 */
+        .video-aspect-box {
             position: relative;
-            flex: 1; /* Faz com que os 3 vídeos dividam o espaço igualmente */
-            min-width: 0; /* Necessário para o flexbox funcionar corretamente */
+            width: 100%;
+            padding-top: 56.25%; /* 16:9 Aspect Ratio (9 / 16 = 0.5625) */
             background-color: #000;
             border-radius: 8px;
             overflow: hidden;
-            /* Método compatível para proporção 16:9 (9 / 16 = 0.5625) */
-            padding-top: 56.25%; 
         }
 
-        .video-container iframe {
+        /* 3. O iframe preenche a caixa de proporção */
+        .video-aspect-box iframe {
             position: absolute;
             top: 0;
             left: 0;
@@ -112,15 +117,16 @@
             border: none;
         }
 
+        /* 4. O título fica sobre a caixa de proporção */
         .video-title {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             background: rgba(41, 45, 54, 0.8);
-            padding: 10px 15px;
+            padding: 8px 12px; /* Reduzido para caber melhor */
             font-weight: 600;
-            font-size: 1.2em;
+            font-size: 1.0em; /* Reduzido para caber melhor */
             z-index: 1;
             color: white;
         }
@@ -148,11 +154,7 @@
             .main-content {
                 flex-direction: column; /* Empilha os vídeos verticalmente */
             }
-            
-            .video-container {
-                 /* Em telas pequenas, a largura será 100% (padrão do flex-direction: column)
-                    e o padding-top: 56.25% garantirá a altura correta. */
-            }
+            /* Os .video-flex-item agora terão 100% de largura automaticamente */
         }
     </style>
 </head>
@@ -173,20 +175,28 @@ Com análises detalhadas, estatísticas precisas e uma comunidade ativa, fornece
     </div>
 
     <div class="main-content">
-        <div class="video-container">
-            <div class="video-title">England</div>
-            <iframe src="https://iframe.net4media.net/streams/0199ce77-5337-7017-bae4-4df2438ddba0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        
+        <div class="video-flex-item">
+            <div class="video-aspect-box">
+                <div class="video-title">England</div>
+                <iframe src="https://iframe.net4media.net/streams/0199ce77-5337-7017-bae4-4df2438ddba0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            </div>
         </div>
 
-        <div class="video-container">
-            <div class="video-title">Italy</div>
-            <iframe src="https://iframe.net4media.net/streams/0199ce72-62fd-72f8-a616-0d5413281f85" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        <div class="video-flex-item">
+            <div class="video-aspect-box">
+                <div class="video-title">Italy</div>
+                <iframe src="https://iframe.net4media.net/streams/0199ce72-62fd-72f8-a616-0d5413281f85" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            </div>
         </div>
 
-        <div class="video-container">
-            <div class="video-title">Spain</div>
-            <iframe src="https://iframe.net4media.net/streams/0199ce73-c384-705b-84f9-88c522fb45a4" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        <div class="video-flex-item">
+            <div class="video-aspect-box">
+                <div class="video-title">Spain</div>
+                <iframe src="https://iframe.net4media.net/streams/0199ce73-c384-705b-84f9-88c522fb45a4" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            </div>
         </div>
+
     </div>
 
     <script>
