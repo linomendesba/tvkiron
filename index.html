@@ -261,11 +261,9 @@
     </div>
 
     <div class="video-selector">
-        <div class="selector" data-video-src="https://kiron.streamamg.com/199/fast-league-single-yaehaejeebii7chail4u.html" data-video-title="England">England</div>
-        <div class="selector" data-video-src="https://streaming.kiron.n4m.ro/50179b0d-BrazillianSingle-199-a164a445d82c.html" data-video-title="Brasil">Brasil</div>
-        <div class="selector" data-video-src="https://kiron.streamamg.com/199/serie-a-zoopeicothooxe6sij4o.html" data-video-title="Italy">Italy</div>
-        <div class="selector" data-video-src="https://streaming.kiron.n4m.ro/50179b0d-LatamSingle-199-a164a445d82c.html" data-video-title="America Latina">America Latina</div>
-        <div class="selector" data-video-src="https://kiron.streamamg.com/199/la-liga-on5eus4pee2cee1im8ie.html" data-video-title="Spain">Spain</div>
+        <div class="selector" data-video-src="https://iframe.net4media.net/streams/0199ce77-5337-7017-bae4-4df2438ddba0" data-video-title="England">England</div>
+        <div class="selector" data-video-src="https://iframe.net4media.net/streams/0199ce72-62fd-72f8-a616-0d5413281f85" data-video-title="Italy">Italy</div>
+        <div class="selector" data-video-src="https://iframe.net4media.net/streams/0199ce73-c384-705b-84f9-88c522fb45a4" data-video-title="Spain">Spain</div>
     </div>
     <br>
     <br>
@@ -279,11 +277,9 @@
 
             // Lista de vídeos disponíveis
             const videos = [
-                { src: "https://kiron.streamamg.com/199/fast-league-single-yaehaejeebii7chail4u.html", title: "England" },
-                { src: "https://streaming.kiron.n4m.ro/50179b0d-BrazillianSingle-199-a164a445d82c.html", title: "Brasil" },
-                { src: "https://kiron.streamamg.com/199/serie-a-zoopeicothooxe6sij4o.html", title: "Italy" },
-                { src: "https://streaming.kiron.n4m.ro/50179b0d-LatamSingle-199-a164a445d82c.html", title: "America Latina" },
-                { src: "https://kiron.streamamg.com/199/la-liga-on5eus4pee2cee1im8ie.html", title: "Spain" }
+                { src: "https://iframe.net4media.net/streams/0199ce77-5337-7017-bae4-4df2438ddba0", title: "England" },
+                { src: "https://iframe.net4media.net/streams/0199ce72-62fd-72f8-a616-0d5413281f85", title: "Italy" },
+                { src: "https://iframe.net4media.net/streams/0199ce73-c384-705b-84f9-88c522fb45a4", title: "Spain" }
             ];
 
             function setActiveVideo(selector) {
@@ -306,8 +302,8 @@
                 // Limpa os vídeos laterais atuais
                 sideVideosContainer.innerHTML = '';
 
-                // Filtra vídeos, excluindo o ativo, e limita a 4
-                const otherVideos = videos.filter(video => video.title !== activeTitle).slice(0, 4);
+                // Filtra vídeos, excluindo o ativo
+                const otherVideos = videos.filter(video => video.title !== activeTitle);
 
                 // Cria novos iframes para os vídeos laterais (2 por linha)
                 otherVideos.forEach(video => {
